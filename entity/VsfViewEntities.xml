@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--
+This software is in the public domain under CC0 1.0 Universal plus a 
+Grant of Patent License.
+
+To the extent possible under law, the author(s) have dedicated all
+copyright and related and neighboring rights to this software to the
+public domain worldwide. This software is distributed without any
+warranty.
+
+You should have received a copy of the CC0 Public Domain Dedication
+along with this software (see the LICENSE.md file). If not, see
+<http://creativecommons.org/publicdomain/zero/1.0/>.
+-->
+<entities xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="http://moqui.org/xsd/entity-definition-3.xsd">
+
+    <view-entity entity-name="ProductCategoryMemberProductStore" package="khms.product.category">
+
+        <member-entity entity-alias="PDST" entity-name="mantle.product.store.ProductStore"/>
+        <member-entity entity-alias="PDSTCAT" entity-name="mantle.product.store.ProductStoreCategory" join-from-alias="PDST">
+            <key-map field-name="productStoreId"/>
+        </member-entity>
+        <member-entity entity-alias="PCM" entity-name="mantle.product.category.ProductCategoryMember" join-from-alias="PDSTCAT">
+            <key-map field-name="productCategoryId"/>
+        </member-entity>
+<!--        <member-entity entity-alias="PCAT" entity-name="mantle.product.category.ProductCategory" join-from-alias="PCM">-->
+<!--            <key-map field-name="productCategoryId"/></member-entity>-->
+        <member-entity entity-alias="PROD" entity-name="mantle.product.Product" join-from-alias="PCM">
+            <key-map field-name="productId"/></member-entity>
+
+        <alias-all entity-alias="PDST"/>
+        <alias-all entity-alias="PCM"><exclude field="comments"/></alias-all>
+        <alias-all entity-alias="PROD"><exclude field="productId"/></alias-all>
+<!--        <alias-all entity-alias="PCAT"/>-->
+
+    </view-entity>
+
+</entities>
